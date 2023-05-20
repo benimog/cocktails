@@ -30,7 +30,7 @@ const CocktailList: React.FC<CocktailListProps> = ({ category }) => {
   }, [category]);
 
   return (
-    <Grid container spacing={3}>
+    <Grid container spacing={3} >
       {cocktails.map((cocktail) => (
         <Grid item key={cocktail.idDrink} xs={12} sm={6} md={4} lg={3}>
           <Card>

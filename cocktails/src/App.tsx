@@ -15,6 +15,14 @@ import CocktailRecipe from './components/CocktailRecipe';
 import { fetchCocktails, fetchCategories } from './services/cocktailApi';
 import { SelectChangeEvent } from '@mui/material/Select';
 import TopBar from './components/TopBar';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
 
 const App: React.FC = () => {
   const [categories, setCategories] = useState<string[]>([]);
@@ -38,12 +46,15 @@ const App: React.FC = () => {
   };
 
   return (
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+
     <Router>
       <TopBar categories={[]} selectedCategory={''} handleCategoryChange={function (event: SelectChangeEvent<string>): void {
         throw new Error('Function not implemented.');
       } } />
 
-      <Container maxWidth="md">
+      <Container maxWidth="md" >
         <Typography variant="h4" align="center" gutterBottom>
           Cocktail Recipes
         </Typography>
@@ -54,6 +65,7 @@ const App: React.FC = () => {
         </Routes>
       </Container>
     </Router>
+    </ThemeProvider>
   );
 };
 
