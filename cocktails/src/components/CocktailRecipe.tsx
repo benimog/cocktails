@@ -8,16 +8,16 @@ interface Cocktail {
   strDrink: string;
   strInstructions: string;
   strDrinkThumb: string;
+  [key: string]: string | null;
 }
 
 interface CocktailRecipeParams {
   id: string;
-  [key: string]: string | undefined;
 }
 
 const CocktailRecipe: React.FC = () => {
-  const { id } = useParams<CocktailRecipeParams>();
-  const [cocktail, setCocktail] = useState<Cocktail | null>(null);
+    const { id } = useParams<{ id: string }>();
+    const [cocktail, setCocktail] = useState<Cocktail | null>(null);
 
   useEffect(() => {
     const fetchCocktailData = async () => {
@@ -38,12 +38,29 @@ const CocktailRecipe: React.FC = () => {
     return <Typography variant="body1">Loading cocktail...</Typography>;
   }
 
+  const ingredientList = [];
+  for (let i = 1; i <= 15; i++) {
+    const ingredient = cocktail[`strIngredient${i}`];
+    const measure = cocktail[`strMeasure${i}`];
+
+    if (ingredient && measure) {
+      ingredientList.push(
+        <li key={i}>
+          {measure} {ingredient}
+        </li>
+      );
+    }
+  }
+
   return (
     <div>
       <Typography variant="h4" gutterBottom>
         {cocktail.strDrink}
       </Typography>
-      <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink} style={{ marginBottom: '1rem' }} />
+      <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink} />
+      <Typography variant="h6">Ingredients:</Typography>
+      <ul>{ingredientList}</ul>
+      <Typography variant="h6">Instructions:</Typography>
       <Typography variant="body2">{cocktail.strInstructions}</Typography>
     </div>
   );

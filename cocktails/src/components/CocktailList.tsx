@@ -1,40 +1,51 @@
-import React from 'react';
-import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Card, CardActionArea, CardContent, CardMedia, Grid, Typography } from '@mui/material';
+import { fetchCocktails } from '../services/cocktailApi';
 
 interface Cocktail {
   idDrink: string;
   strDrink: string;
-  strInstructions: string;
   strDrinkThumb: string;
 }
 
 interface CocktailListProps {
-  cocktails: Cocktail[];
+  category: string;
 }
 
-const CocktailList: React.FC<CocktailListProps> = ({ cocktails }) => {
+const CocktailList: React.FC<CocktailListProps> = ({ category }) => {
+  const [cocktails, setCocktails] = useState<Cocktail[]>([]);
+
+  useEffect(() => {
+    const fetchCocktailList = async () => {
+      try {
+        const data = await fetchCocktails(category);
+        setCocktails(data.drinks);
+      } catch (error) {
+        console.error('Error fetching cocktails:', error);
+      }
+    };
+
+    fetchCocktailList();
+  }, [category]);
+
   return (
-    <Box sx={{ display: 'grid', gap: 2 }}>
-      <Typography variant="h4" sx={{ marginBottom: 2 }}>
-        Cocktail List
-      </Typography>
-      <Box sx={{ display: 'grid', gap: 2, gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))' }}>
-        {cocktails.map((cocktail) => (
-          <Card key={cocktail.idDrink} sx={{ maxWidth: 300 }}>
-            <CardMedia component="img" height="200" image={cocktail.strDrinkThumb} alt={cocktail.strDrink} />
-            <CardContent>
-              <Link to={`/cocktails/${cocktail.idDrink}`} style={{ textDecoration: 'none' }}>
-                <Typography variant="h6" component="div">
+    <Grid container spacing={3}>
+      {cocktails.map((cocktail) => (
+        <Grid item key={cocktail.idDrink} xs={12} sm={6} md={4} lg={3}>
+          <Card>
+            <CardActionArea component={Link} to={`/recipe/${cocktail.idDrink}`}>
+              <CardMedia component="img" height="140" image={cocktail.strDrinkThumb} alt={cocktail.strDrink} />
+              <CardContent>
+                <Typography variant="h6" component="h2" align="center">
                   {cocktail.strDrink}
                 </Typography>
-              </Link>
-              <Typography variant="body2">{cocktail.strInstructions}</Typography>
-            </CardContent>
+              </CardContent>
+            </CardActionArea>
           </Card>
-        ))}
-      </Box>
-    </Box>
+        </Grid>
+      ))}
+    </Grid>
   );
 };
 
