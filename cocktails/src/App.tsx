@@ -1,18 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
-import {
-  AppBar,
-  Container,
-  MenuItem,
-  Select,
-  Toolbar,
-  Typography,
-  FormControl,
-  InputLabel,
-} from '@mui/material';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { AppBar, Container, MenuItem, Select, Toolbar, Typography } from '@mui/material';
 import CocktailList from './components/CocktailList';
 import CocktailRecipe from './components/CocktailRecipe';
-import { fetchCocktails, fetchCategories } from './services/cocktailApi';
+import { fetchDrink, fetchCategories, fetchCocktailsByCategory } from './services/cocktailApi';
 import { SelectChangeEvent } from '@mui/material/Select';
 import TopBar from './components/TopBar';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -48,23 +39,26 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
+      <Router>
+        <TopBar categories={categories} selectedCategory={selectedCategory} handleCategoryChange={handleCategoryChange} />
 
-    <Router>
-      <TopBar categories={[]} selectedCategory={''} handleCategoryChange={function (event: SelectChangeEvent<string>): void {
-        throw new Error('Function not implemented.');
-      } } />
+        <Container maxWidth="md">
+          <Typography variant="h4" align="center" gutterBottom>
+            {selectedCategory === "" ? "Ordinary Drink" : selectedCategory} Recipes
+          </Typography>
 
-      <Container maxWidth="md" >
-        <Typography variant="h4" align="center" gutterBottom>
-          Cocktail Recipes
-        </Typography>
-
-        <Routes>
-          <Route path="/" element={<CocktailList category={selectedCategory} />} />
-          <Route path="/recipe/:id" element={<CocktailRecipe />} />
-        </Routes>
-      </Container>
-    </Router>
+          {categories.length > 0 ? (
+            <Routes>
+              <Route path="/" element={<CocktailList category={selectedCategory} />} />
+              <Route path="/drink/:id" element={<CocktailRecipe />} />
+            </Routes>
+          ) : (
+            <Typography variant="body1" align="center">
+              Loading categories...
+            </Typography>
+          )}
+        </Container>
+      </Router>
     </ThemeProvider>
   );
 };

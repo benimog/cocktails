@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Typography } from '@mui/material';
-import { fetchCocktails } from '../services/cocktailApi';
+import { fetchDrink } from '../services/cocktailApi';
 
 interface Cocktail {
   idDrink: string;
@@ -23,7 +23,7 @@ const CocktailRecipe: React.FC = () => {
     const fetchCocktailData = async () => {
       if (id) {
         try {
-          const data = await fetchCocktails(id);
+          const data = await fetchDrink(id);
           setCocktail(data.drinks[0]);
         } catch (error) {
           console.error('Error fetching cocktail:', error);
