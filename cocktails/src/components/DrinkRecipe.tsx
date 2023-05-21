@@ -40,7 +40,7 @@ const CocktailRecipe: React.FC = () => {
     const ingredient = cocktail[`strIngredient${i}`];
     const measure = cocktail[`strMeasure${i}`];
 
-    if (ingredient && measure) {
+    if (ingredient || measure) {
       ingredientList.push(
         <li key={i}>
           {measure} {ingredient}
