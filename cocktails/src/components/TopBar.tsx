@@ -18,7 +18,6 @@ const TopBar: React.FC<TopBarProps> = ({ categories, selectedCategory, handleCat
         <FormControl variant="outlined" margin="normal" style={{ marginLeft: '1em', width: '120px' }} >
           <InputLabel id="category-label">Category</InputLabel>
           <Select labelId="category-label" value={selectedCategory} onChange={handleCategoryChange} label="Category" >
-            {/* <MenuItem value="">All</MenuItem> */}
             {categories.map((category) => (
               <MenuItem key={category} value={category} >
                 {category}

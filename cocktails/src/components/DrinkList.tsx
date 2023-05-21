@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardActionArea, CardContent, CardMedia, Grid, Typography } from '@mui/material';
-import { fetchDrink, fetchCocktailsByCategory } from '../services/cocktailApi';
+import { fetchCocktailsByCategory } from '../services/drinkApi';
 
 interface Drink {
   idDrink: string;
@@ -9,11 +9,11 @@ interface Drink {
   strDrinkThumb: string;
 }
 
-interface CocktailListProps {
+interface DrinkListProps {
   category: string;
 }
 
-const CocktailList: React.FC<CocktailListProps> = ({ category }) => {
+const CocktailList: React.FC<DrinkListProps> = ({ category }) => {
   const [cocktails, setCocktails] = useState<Drink[]>([]);
 
   useEffect(() => {

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Typography } from '@mui/material';
-import { fetchDrink } from '../services/cocktailApi';
+import { fetchDrink } from '../services/drinkApi';
 
-interface Cocktail {
+interface Drink {
   idDrink: string;
   strDrink: string;
   strInstructions: string;
@@ -11,13 +11,10 @@ interface Cocktail {
   [key: string]: string | null;
 }
 
-interface CocktailRecipeParams {
-  id: string;
-}
 
 const CocktailRecipe: React.FC = () => {
     const { id } = useParams<{ id: string }>();
-    const [cocktail, setCocktail] = useState<Cocktail | null>(null);
+    const [cocktail, setCocktail] = useState<Drink | null>(null);
 
   useEffect(() => {
     const fetchCocktailData = async () => {
@@ -35,7 +32,7 @@ const CocktailRecipe: React.FC = () => {
   }, [id]);
 
   if (!cocktail) {
-    return <Typography variant="body1">Loading cocktail...</Typography>;
+    return <Typography variant="body1">Loading drink...</Typography>;
   }
 
   const ingredientList = [];

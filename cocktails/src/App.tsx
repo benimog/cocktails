@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { AppBar, Container, MenuItem, Select, Toolbar, Typography } from '@mui/material';
-import CocktailList from './components/CocktailList';
-import CocktailRecipe from './components/CocktailRecipe';
-import { fetchDrink, fetchCategories, fetchCocktailsByCategory } from './services/cocktailApi';
+import { Container, Typography } from '@mui/material';
+import CocktailList from './components/DrinkList';
+import CocktailRecipe from './components/DrinkRecipe';
+import { fetchCategories } from './services/drinkApi';
 import { SelectChangeEvent } from '@mui/material/Select';
 import TopBar from './components/TopBar';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
