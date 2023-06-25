@@ -1,4 +1,4 @@
-# Drinks
+# Crafty Mixology
 
 Website listing recipes for different drinks.
 

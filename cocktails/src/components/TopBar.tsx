@@ -13,9 +13,9 @@ const TopBar: React.FC<TopBarProps> = ({ categories, selectedCategory, handleCat
     <AppBar position="static" style={{ marginBottom: '20px' }}>
       <Toolbar>
         <Typography variant="h6" component={Link} to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-          Drink Recipes
+        Crafty Mixology
         </Typography>
-        <FormControl variant="outlined" margin="normal" style={{ marginLeft: '1em', width: '120px' }} >
+        <FormControl variant="outlined" margin="normal" style={{ marginLeft: '1em', width: '200px' }} >
           <InputLabel id="category-label">Category</InputLabel>
           <Select labelId="category-label" value={selectedCategory} onChange={handleCategoryChange} label="Category" >
             {categories.map((category) => (
