@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Typography } from '@mui/material';
+import { Typography, styled } from '@mui/material';
 import { fetchDrink } from '../services/drinkApi';
 
 interface Drink {
@@ -11,10 +11,20 @@ interface Drink {
   [key: string]: string | null;
 }
 
+const StyledDrinkRecipe = styled('div')(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  '& > *': {
+    marginBottom: theme.spacing(2),
+  },
+  paddingBottom: theme.spacing(5),
+}));
+
 
 const CocktailRecipe: React.FC = () => {
-    const { id } = useParams<{ id: string }>();
-    const [cocktail, setCocktail] = useState<Drink | null>(null);
+  const { id } = useParams<{ id: string }>();
+  const [cocktail, setCocktail] = useState<Drink | null>(null);
 
   useEffect(() => {
     const fetchCocktailData = async () => {
@@ -50,16 +60,16 @@ const CocktailRecipe: React.FC = () => {
   }
 
   return (
-    <div>
+    <StyledDrinkRecipe>
       <Typography variant="h4" gutterBottom>
         {cocktail.strDrink}
       </Typography>
-      <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink} />
+      <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink} style={{ maxWidth: '100%', height: 'auto' }} />
       <Typography variant="h6">Ingredients:</Typography>
       <ul>{ingredientList}</ul>
       <Typography variant="h6">Instructions:</Typography>
       <Typography variant="body2">{cocktail.strInstructions}</Typography>
-    </div>
+    </StyledDrinkRecipe>
   );
 };
 
