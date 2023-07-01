@@ -1,7 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { Card, CardActionArea, CardContent, CardMedia, Grid, Typography } from '@mui/material';
-import { searchDrink } from '../services/drinkApi';
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Grid,
+  Typography,
+} from "@mui/material";
+import { searchDrink } from "../services/drinkApi";
 
 interface Drink {
   idDrink: string;
@@ -39,7 +46,12 @@ const SearchResults: React.FC = () => {
           <Grid item key={drink.idDrink} xs={12} sm={6} md={4} lg={3}>
             <Card>
               <CardActionArea component={Link} to={`/drink/${drink.idDrink}`}>
-                <CardMedia component="img" height="140" image={drink.strDrinkThumb} alt={drink.strDrink} />
+                <CardMedia
+                  component="img"
+                  height="140"
+                  image={drink.strDrinkThumb}
+                  alt={drink.strDrink}
+                />
                 <CardContent>
                   <Typography variant="h6" component="h2" align="center">
                     {drink.strDrink}
