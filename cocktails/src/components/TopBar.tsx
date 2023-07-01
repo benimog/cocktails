@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, Box } from '@mui/material';
-import { searchDrink } from '../services/drinkApi';
 
 interface TopBarProps {
   categories: string[];
@@ -23,6 +22,10 @@ const TopBar: React.FC<TopBarProps> = ({ categories, selectedCategory, handleCat
     }
   };
 
+  const handleClearSearch = () => {
+    setSearchTerm('');
+  };
+
   return (
     <AppBar position="static" style={{ marginBottom: '20px' }}>
       <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -40,7 +43,7 @@ const TopBar: React.FC<TopBarProps> = ({ categories, selectedCategory, handleCat
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <img src={process.env.PUBLIC_URL + '/logo192.png'} alt="Logo" style={{ height: '30px', marginRight: '10px' }} />
-          <Typography variant="h6" component={Link} to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+          <Typography variant="h6" component={Link} to="/" style={{ textDecoration: 'none', color: 'inherit' }} onClick={handleClearSearch}>
             Crafty Mixology
           </Typography>
         </div>
