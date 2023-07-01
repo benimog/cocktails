@@ -11,7 +11,6 @@ import {
   Select,
   SelectChangeEvent,
   TextField,
-  Box,
 } from "@mui/material";
 
 interface TopBarProps {
