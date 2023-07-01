@@ -11,9 +11,10 @@ interface Drink {
 
 interface DrinkListProps {
   category: string;
+  selectedCategory: string;
 }
 
-const CocktailList: React.FC<DrinkListProps> = ({ category }) => {
+const CocktailList: React.FC<DrinkListProps> = ({ category, selectedCategory }) => {
   const [cocktails, setCocktails] = useState<Drink[]>([]);
 
   useEffect(() => {
@@ -35,6 +36,10 @@ const CocktailList: React.FC<DrinkListProps> = ({ category }) => {
   }, [category]);
 
   return (
+    <div>
+                <Typography variant="h4" align="center" gutterBottom>
+            {selectedCategory === "" ? "Ordinary Drink" : selectedCategory} Recipes
+          </Typography>
     <Grid container spacing={3}>
       {cocktails.length === 0 ? (
         <Grid item xs={12}>
@@ -59,6 +64,7 @@ const CocktailList: React.FC<DrinkListProps> = ({ category }) => {
         ))
       )}
     </Grid>
+    </div>
   );
 };
 

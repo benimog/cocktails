@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, Box } from '@mui/material';
+import { searchDrink } from '../services/drinkApi';
 
 interface TopBarProps {
   categories: string[];
@@ -9,10 +11,21 @@ interface TopBarProps {
 }
 
 const TopBar: React.FC<TopBarProps> = ({ categories, selectedCategory, handleCategoryChange }) => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
+
+  const handleSearch = async () => {
+    try {
+      // Navigate to the SearchResults page with searchTerm as a URL parameter
+      navigate(`/search/${searchTerm}`);
+    } catch (error) {
+      console.error('Error searching for drink:', error);
+    }
+  };
+
   return (
     <AppBar position="static" style={{ marginBottom: '20px' }}>
       <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
-
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <FormControl variant="outlined" margin="normal" style={{ marginRight: '1em', width: '200px' }}>
             <InputLabel id="category-label">Category</InputLabel>
@@ -32,9 +45,19 @@ const TopBar: React.FC<TopBarProps> = ({ categories, selectedCategory, handleCat
           </Typography>
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <TextField id="outlined-basic" label="Search" variant="outlined" />
+          <TextField
+            id="outlined-basic"
+            label="Search"
+            variant="outlined"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') {
+                handleSearch();
+              }
+            }}
+          />
         </div>
-
       </Toolbar>
     </AppBar>
   );

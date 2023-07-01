@@ -16,7 +16,6 @@ export const fetchDrink = async (drinkId?: string) => {
     }
   };
   
-  
   export const fetchCategories = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/list.php?c=list`);
@@ -33,3 +32,12 @@ export const fetchDrink = async (drinkId?: string) => {
     return data;
   };
   
+  export const searchDrink = async (name: string) => {
+    try {
+      const response = await axios.get(`${BASE_URL}/search.php?s=${name}`);
+      return response.data;
+    } catch (error) {
+      console.error(`Error fetching dirnks${name ? ` for drink ${name}` : ''}:`, error);
+      throw error;
+    }
+  }
