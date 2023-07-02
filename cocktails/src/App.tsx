@@ -9,6 +9,7 @@ import { SelectChangeEvent } from "@mui/material/Select";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import SearchResults from "./components/SearchResults";
+import RandomRecipe from "./components/RandomRecipe"
 
 const darkTheme = createTheme({
   palette: {
@@ -46,7 +47,6 @@ const App: React.FC = () => {
           selectedCategory={selectedCategory}
           handleCategoryChange={handleCategoryChange}
         />
-
         <Container maxWidth="md">
           {categories.length > 0 ? (
             <Routes>
@@ -61,6 +61,7 @@ const App: React.FC = () => {
               />
               <Route path="/drink/:id" element={<CocktailRecipe />} />
               <Route path="/search/:term" element={<SearchResults />} />
+              <Route path="/random" element={<RandomRecipe />} />
             </Routes>
           ) : (
             <Typography variant="body1" align="center">

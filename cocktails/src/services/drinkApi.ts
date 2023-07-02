@@ -47,3 +47,13 @@ export const searchDrink = async (name: string) => {
     throw error;
   }
 };
+
+export const fetchRandomDrink = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/random.php`);
+    return response;
+  } catch (error) {
+    console.error("Error fetching random drink: ", error);
+    throw error;
+  }
+};

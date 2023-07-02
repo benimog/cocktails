@@ -54,11 +54,6 @@ function convertImperialToMetric(text: string): string {
   return inchToCm;
 }
 
-
-
-
-
-
 const CocktailRecipe: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [cocktail, setCocktail] = useState<Drink | null>(null);
