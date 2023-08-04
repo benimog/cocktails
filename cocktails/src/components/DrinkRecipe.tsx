@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Typography, styled } from '@mui/material';
 import { fetchDrink } from '../services/drinkApi';
+import Footer from './Footer';
 
 interface Drink {
   idDrink: string;
@@ -54,11 +55,6 @@ function convertImperialToMetric(text: string): string {
   return inchToCm;
 }
 
-
-
-
-
-
 const CocktailRecipe: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [cocktail, setCocktail] = useState<Drink | null>(null);
@@ -102,6 +98,7 @@ const CocktailRecipe: React.FC = () => {
   const convertedInstructions = convertImperialToMetric(cocktail.strInstructions);
 
   return (
+    <div>
     <StyledDrinkRecipe>
       <Typography variant="h4" gutterBottom>
         {cocktail.strDrink}
@@ -112,6 +109,8 @@ const CocktailRecipe: React.FC = () => {
       <Typography variant="h6">Instructions:</Typography>
       <Typography variant="body2">{convertedInstructions}</Typography>
     </StyledDrinkRecipe>
+    <Footer />
+    </div>
   );
 };
 

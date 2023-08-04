@@ -6,9 +6,10 @@ import {
   CardContent,
   CardMedia,
   Grid,
-  Typography,
+  Typography
 } from "@mui/material";
 import { fetchCocktailsByCategory } from "../services/drinkApi";
+import Footer from "./Footer";
 
 interface Drink {
   idDrink: string;
@@ -85,6 +86,7 @@ const CocktailList: React.FC<DrinkListProps> = ({
           ))
         )}
       </Grid>
+      <Footer />
     </div>
   );
 };
