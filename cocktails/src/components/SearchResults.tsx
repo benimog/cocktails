@@ -9,6 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import { searchDrink } from "../services/drinkApi";
+import Footer from "./Footer";
 
 interface Drink {
   idDrink: string;
@@ -34,6 +35,7 @@ const SearchResults: React.FC = () => {
   }, [term]);
 
   return (
+    <div>
     <Grid container spacing={3}>
       {drinks.length === 0 ? (
         <Grid item xs={12}>
@@ -63,6 +65,8 @@ const SearchResults: React.FC = () => {
         ))
       )}
     </Grid>
+    <Footer />
+    </div>
   );
 };
 
