@@ -9,6 +9,7 @@ import { SelectChangeEvent } from "@mui/material/Select";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import SearchResults from "./components/SearchResults";
+import Footer from "./components/Footer";
 
 const darkTheme = createTheme({
   palette: {
